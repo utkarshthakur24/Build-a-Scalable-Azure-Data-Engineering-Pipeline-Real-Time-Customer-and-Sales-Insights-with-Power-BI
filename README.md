@@ -84,4 +84,4 @@ To meet these requirements, the solution is broken down into the following compo
 This project provides a robust end-to-end solution for understanding customer demographics and their impact on sales. The automated data pipeline ensures stakeholders always have access to the most current and actionable insights.
 
 ---
-For more details, please refer to the [documentation](./docs).
+For more detailed explanation, please refer to the [documentation](https://medium.com/@utkarshthakur2404/project-headline-building-a-scalable-azure-data-engineering-pipeline-real-time-customer-and-sales-d5fbc266bc0a)].
