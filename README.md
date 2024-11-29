@@ -1,4 +1,4 @@
-# Azure End-to-End Data Engineering Real-Time Project
+# **"End-to-End Azure Data Engineering Project: Real-Time Sales Analytics and Scalable Insights with Power BI"**
 
 This project is a data engineering pipeline solution to a fictional business problem, designed to help me learn and understand data pipelining.
 For more detailed explanation, please refer to the [medium.com Article](https://medium.com/@utkarshthakur2404/project-headline-building-a-scalable-azure-data-engineering-pipeline-real-time-customer-and-sales-d5fbc266bc0a).
