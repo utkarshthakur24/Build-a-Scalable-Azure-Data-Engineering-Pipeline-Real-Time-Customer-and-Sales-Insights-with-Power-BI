@@ -26,8 +26,9 @@ To meet these requirements, the solution is broken down into the following compo
 - **Secure Credentials**: Store SQL Server credentials in Azure Key Vault and grant necessary access to Azure services.  
 
 ## Part 2: Data Ingestion
-- Source Data: Extract customer and sales data from the on-premises SQL database.
-- Data Load: Use Azure Data Factory (ADF) to load the extracted data into the raw layer (Bronze) of ADLS.
+- **Source Data Extraction**: Dynamically extract all tables from the `SalesLT` schema in the on-premises SQL Server database.  
+- **Data Load to Bronze Layer**: Use Azure Data Factory (ADF) to copy the extracted data into the Bronze layer of Azure Data Lake Storage (ADLS) in Parquet format, organizing data by schema and table.  
+- **Dynamic and Scalable Pipeline**: Implement Lookup and ForEach activities in ADF to adapt to schema changes automatically, ensuring a scalable and efficient data ingestion process.  
 
 ## Part 3: Data Transformation
 
