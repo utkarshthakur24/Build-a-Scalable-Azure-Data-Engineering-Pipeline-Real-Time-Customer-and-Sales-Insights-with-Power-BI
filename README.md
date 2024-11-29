@@ -11,6 +11,7 @@ for date-based queries.
 To address this request, we'll build a robust data pipeline that extracts the on-premises data, loads it into Azure, and performs the necessary transformations to make the data more query-friendly. The transformed data will then feed into a custom-built report by Power BI dashboard that meets all the specified requirements. This pipeline will be scheduled to run automatically every day, ensuring that stakeholders always have access to up to-date and accurate data.
 
 
+
 # Project Architecture
 
 This step-by-step approach ensures a structured and efficient implementation of the data pipeline.
@@ -27,39 +28,38 @@ To meet these requirements, the solution is broken down into the following compo
 - Source Data: Extract customer and sales data from the on-premises SQL database.
 - Data Load: Use Azure Data Factory (ADF) to load the extracted data into the raw layer (Bronze) of ADLS.
 
-    Part 3: Data Transformation
+## Part 3: Data Transformation
 
-    Data Cleansing: Use Azure Databricks to clean and preprocess the raw data.
-    Data Organization: Structure the data into the Bronze, Silver, and Gold layers:
+- **Data Cleansing**: Use Azure Databricks to clean and preprocess the raw data.
+- **Data Organization**: Structure the data into the Bronze, Silver, and Gold layers:
     Bronze: Raw data as ingested from the source.
     Silver: Cleansed and enriched data.
     Gold: Aggregated data ready for analytics and reporting.
 
-    Part 4: Data Loading
+## Part 4: Data Loading
 
-    Synapse Integration: Load the transformed data from the Gold layer into Azure Synapse Analytics for high-performance querying and reporting.
+- **Synapse Integration**: Load the transformed data from the Gold layer into Azure Synapse Analytics for high-performance querying and reporting.
 
-    Part 5: Data Reporting
+## Part 5: Data Reporting
 
-    Power BI Dashboard: Create and connect a Power BI dashboard to Azure Synapse Analytics to visualize sales trends and demographic insights.
-    Stakeholder Exploration: Enable interactive exploration of the data for business stakeholders.
+- **Power BI Dashboard**: Create and connect a Power BI dashboard to Azure Synapse Analytics to visualize sales trends and demographic insights.
+- **Stakeholder Exploration**: Enable interactive exploration of the data for business stakeholders.
 
-    Part 6: Security, Automation & End-to-End Pipeline Testing
+##Part 6: Security, Automation & End-to-End Pipeline Testing
 
-    Creating Security Group using Azure Active Directory (AAD)
-    Pipeline Scheduling: Automate the entire pipeline using ADF triggers to ensure daily updates of data and reports.
-    Testing: Conduct end-to-end testing of the pipeline to validate data quality, transformations, and reporting.
-    Monitoring: Implement monitoring using Azure Monitor to track pipeline performance and detect failures.
+- Creating Security Group using Azure Active Directory (AAD)
+- **Pipeline Scheduling**: Automate the entire pipeline using ADF triggers to ensure daily updates of data and reports.
+- **Testing**: Conduct end-to-end testing of the pipeline to validate data quality, transformations, and reporting.
+- **Monitoring**: Implement monitoring using Azure Monitor to track pipeline performance and detect failures.
 
-Technology Stack
-
-    Azure Data Factory (ADF): For orchestrating data movement and transformation.
-    Azure Data Lake Storage (ADLS): For storing raw and processed data.
-    Azure Databricks: For data transformation and processing.
-    Azure Synapse Analytics: For data warehousing and SQL-based analytics.
-    Power BI: For data visualization and reporting.
-    Azure Key Vault: For securely managing credentials and secrets.
-    SQL Server (On-Premises): Source of customer and sales data.
+## Technology Stack
+- **Azure Data Factory (ADF)**: For orchestrating data movement and transformation.
+- **Azure Data Lake Storage (ADLS)**: For storing raw and processed data.
+- **Azure Databricks**: For data transformation and processing.
+- **Azure Synapse Analytics**: For data warehousing and SQL-based analytics.
+- **Power BI**: For data visualization and reporting.
+- **Azure Key Vault**: For securely managing credentials and secrets.
+- **SQL Server (On-Premises)**: Source of customer and sales data.
 
 
 
