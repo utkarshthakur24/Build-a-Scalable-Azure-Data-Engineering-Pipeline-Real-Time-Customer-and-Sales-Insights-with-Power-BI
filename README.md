@@ -3,17 +3,13 @@
 This project is a data engineering pipeline solution to a fictional business problem, designed to help me learn and understand data pipelining.
 For more detailed explanation, please refer to the [medium.com Article](https://medium.com/@utkarshthakur2404/project-headline-building-a-scalable-azure-data-engineering-pipeline-real-time-customer-and-sales-d5fbc266bc0a).
 
-## Project Overview
+# Project Overview
+## Business Request
+In this project, my company has recognized a gap in understanding its customer demographics - specifically, the gender distribution within the customer base and how it might influence product purchases. With a significant amount of customer data stored in an on-premises SQL database, key stakeholders have requested a comprehensive KPI dashboard. This dashboard should provide insights into sales by gender and product category, showing total sold, total sates revenue. and a clear gender split among customers. Additionally, they need the ability to filter this data by product category and gender. with a user-friendly interface
+for date-based queries.
+## Solution Overview
+To address this request, we'll build a robust data pipeline that extracts the on-premises data, loads it into Azure, and performs the necessary transformations to make the data more query-friendly. The transformed data will then feed into a custom-built report by Power BI dashboard that meets all the specified requirements. This pipeline will be scheduled to run automatically every day, ensuring that stakeholders always have access to up to-date and accurate data.
 
-This project builds a comprehensive data pipeline on Azure to address a critical business need. The objective is to extract customer and sales data from an on-premises SQL database, transform it in the cloud, and generate actionable insights via a Power BI dashboard. The dashboard highlights key performance indicators (KPIs) such as gender distribution and product category sales. Stakeholders can filter and analyze data by date, product category, and gender.
-
-## Business Requirements
-
-The business identified a gap in understanding customer demographics, particularly gender distribution, and its influence on product purchases. The key requirements are:
-
-- **Sales by Gender and Product Category**: A dashboard displaying total products sold, total sales revenue, and gender breakdown.
-- **Data Filtering**: Ability to filter data by product category, gender, and date.
-- **User-Friendly Interface**: Easy access for stakeholders to query data.
 
 ## Solution Overview
 
