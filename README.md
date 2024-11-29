@@ -102,7 +102,7 @@ Right-click on Databases → Restore Database → Select the downloaded backup f
 
 Run the following script to create a new SQL Server login, user, and assign permissions:  
 
-sql
+```sql
 -- Replace YourLogin and YourPassword with your desired login name and password  
 CREATE LOGIN YourLogin WITH PASSWORD = 'YourPassword';  
 GO  
@@ -115,7 +115,7 @@ GO
 USE [YourDatabaseName];  
 ALTER ROLE db_datareader ADD MEMBER YourUser;  
 GO  
-
+```
 
 
 
