@@ -21,8 +21,9 @@ This step-by-step approach ensures a structured and efficient implementation of 
 To meet these requirements, the solution is broken down into the following components:
 
 ## Part 1: Environment Setup
-- Provision Azure Resources: Set up necessary resources including Azure Data Lake Storage (ADLS), Azure Data Factory (ADF), Azure Databricks, and Azure Synapse Analytics.
-- Configure Networking and Access: Ensure secure communication between services using Azure Private Link and Managed Identity.
+- **Azure Environment Setup**: Provision key resources (ADLS, ADF, Azure Databricks, Synapse Analytics, Key Vault) and configure secure networking with Private Link and Managed Identity.  
+- **Source Database Setup**: Restore the AdventureWorksLT2022 database in SQL Server, create a user with `db_datareader` permissions, and verify access.  
+- **Secure Credentials**: Store SQL Server credentials in Azure Key Vault and grant necessary access to Azure services.  
 
 ## Part 2: Data Ingestion
 - Source Data: Extract customer and sales data from the on-premises SQL database.
