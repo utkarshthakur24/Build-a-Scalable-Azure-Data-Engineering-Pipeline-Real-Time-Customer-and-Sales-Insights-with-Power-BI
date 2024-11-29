@@ -112,6 +112,27 @@ Run the following script to create a new SQL Server login, user, and assign perm
  Example: Replace `YourLogin` with `xyx`, `YourPassword` with `admin`, and `YourDatabaseName` with the name of the restored database.
 
 
+### 3. Create a Login and User in SQL Server  
+
+Run the following script to create a new SQL Server login, user, and assign permissions:  
+
+sql
+-- Replace YourLogin and YourPassword with your desired login name and password  
+CREATE LOGIN YourLogin WITH PASSWORD = 'YourPassword';  
+GO  
+
+-- Replace YourUser with your desired username  
+CREATE USER YourUser FOR LOGIN YourLogin;  
+GO  
+
+-- Grant read permissions to the restored database  
+USE [YourDatabaseName];  
+ALTER ROLE db_datareader ADD MEMBER YourUser;  
+GO  
+
+
+
+
 ### 4. Verify Permissions
 - In SSMS, navigate to: 
  `Databases → YourDatabase → Security → Users → [YourUser] → Properties`
