@@ -97,7 +97,7 @@ Run the following script to create a new SQL Server login, user, and assign perm
  Example: Replace `YourLogin` with `xyx`, `YourPassword` with `admin`, and `YourDatabaseName` with the name of the restored database.
 
 
-4. Verify Permissions
+### 4. Verify Permissions
 - In SSMS, navigate to: 
  `Databases → YourDatabase → Security → Users → [YourUser] → Properties`
 - Under **Membership**, ensure that `db_datareader` is selected.
