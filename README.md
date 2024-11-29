@@ -45,7 +45,7 @@ To meet these requirements, the solution is broken down into the following compo
 - **Power BI Dashboard**: Create and connect a Power BI dashboard to Azure Synapse Analytics to visualize sales trends and demographic insights.
 - **Stakeholder Exploration**: Enable interactive exploration of the data for business stakeholders.
 
-##Part 6: Security, Automation & End-to-End Pipeline Testing
+## Part 6: Security, Automation & End-to-End Pipeline Testing
 
 - Creating Security Group using Azure Active Directory (AAD)
 - **Pipeline Scheduling**: Automate the entire pipeline using ADF triggers to ensure daily updates of data and reports.
@@ -66,40 +66,6 @@ To meet these requirements, the solution is broken down into the following compo
 
 
 
-
-
-
-
-
-
-## Solution Overview
-
-To meet these requirements, the solution is broken down into the following components:
-
-### Data Ingestion
-- Extract customer and sales data from an on-premises SQL database.
-- Load data into Azure Data Lake Storage (ADLS) via Azure Data Factory (ADF).
-
-### Data Transformation
-- Use Azure Databricks to clean and transform the data.
-- Organize the data into Bronze, Silver, and Gold layers for raw, cleansed, and aggregated data respectively.
-
-### Data Loading and Reporting
-- Load transformed data into Azure Synapse Analytics.
-- Build a Power BI dashboard to visualize sales and demographic insights.
-
-### Automation
-- Schedule the pipeline to run daily, ensuring that data and reports remain up-to-date.
-
-## Technology Stack
-
-- **Azure Data Factory (ADF)**: Orchestrates data movement and transformation.
-- **Azure Data Lake Storage (ADLS)**: Stores raw and processed data.
-- **Azure Databricks**: Performs data transformation and processing.
-- **Azure Synapse Analytics**: Data warehousing and SQL-based analytics.
-- **Power BI**: For data visualization and reporting.
-- **Azure Key Vault**: Securely manages credentials and secrets.
-- **SQL Server (On-Premises)**: Source of customer and sales data.
 
 ## Setup Instructions
 
