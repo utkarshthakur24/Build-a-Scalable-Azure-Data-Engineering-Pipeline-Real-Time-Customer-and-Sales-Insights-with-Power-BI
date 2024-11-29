@@ -106,6 +106,52 @@ Run the following script to create a new SQL Server login, user, and assign perm
 
 
 
+## Part 3: Secure Credentials in Azure Key Vault
+**1. Store Database Credentials**
+- Navigate to the Azure Key Vault created earlier.
+- Add Secrets for the SQL Server username and password:
+
+Secret Name: `SQL-Username`
+Secret Value: Your SQL Server username (e.g., `YourLogin`).
+Secret Name: `SQL-Password`
+Secret Value: Your SQL Server password (e.g., `YourPassword`).
+
+**2. Configure Access Policies** 
+In Key Vault, assign appropriate permissions to services like Azure Data Factory to access the secrets securely.
+![image](https://github.com/user-attachments/assets/4e771f84-7a12-47ba-aae8-03a6755eb372)
+
+
+
+
+## AdventureWorksLT2022 Database Overview:
+AdventureWorksLT2022 is a lightweight version of the AdventureWorks sample database provided by Microsoft. It is designed for learning and demonstration purposes, focusing on simplified schemas suitable for understanding basic database operations and concepts. This database represents a fictional company’s sales and business data.
+### Schema Overview
+
+AdventureWorksLT2022 contains a logical organization of tables grouped into functional areas:
+
+1. Sales:
+
+    SalesOrderHeader: Contains details of individual sales orders, such as order dates, totals, and statuses.
+    SalesOrderDetail: Includes line-item details for each sales order, linking to products.
+
+2. Customer:
+
+    Customer: Stores customer information, including name, contact details, and demographics.
+    CustomerAddress: Tracks multiple addresses for each customer, including billing and shipping addresses.
+
+3. Products:
+
+    Product: Contains details about the products, such as names, prices, and categories.
+    ProductCategory and ProductModel: Provide hierarchical information about product classifications.
+    ProductDescription: Stores textual descriptions of products to enhance their understanding and marketing.
+    ProductModelProductDescription: Acts as a bridge table linking ProductModel to ProductDescription, supporting multilingual or versioned descriptions.
+
+4. Address and Location:
+
+    Address: Stores address data used across customers and sales.
+
+Entity Relation Diagram for this Database:
+
 
 
 
