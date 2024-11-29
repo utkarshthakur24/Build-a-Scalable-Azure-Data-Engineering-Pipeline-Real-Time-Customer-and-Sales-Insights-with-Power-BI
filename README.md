@@ -62,6 +62,49 @@ To meet these requirements, the solution is broken down into the following compo
 - **SQL Server (On-Premises)**: Source of customer and sales data.
 
 
+## Pipeline Development and Execution
+Developing and running the data engineering pipeline to transform raw data into actionable insights.
+
+## 1. Environment setup
+Here are the steps we have followed:
+
+### Part 1: Azure Environment Setup
+- **Azure Resource Group Setup**
+Log in to the Azure Portal and create a Resource Group to organize all related resources.
+
+### **2. Create Required Azure Resources**
+- **Azure Data Factory**: Deploy an Azure Data Factory instance within the Resource Group for orchestrating data workflows.
+- **Azure Synapse Analytics**: Set up Synapse Analytics for data querying and reporting.
+- **Azure Data Lake Storage (ADLS)**: Provision a Data Lake to store raw, cleansed, and transformed data.
+- **Azure Databricks**: Create a Databricks workspace for data transformation and processing.
+- **Azure Key Vault**: Configure a Key Vault for securely managing sensitive information such as database credentials.
+
+![image](https://github.com/user-attachments/assets/04077117-db53-4db3-a818-b961802005a5)
+
+### 3. Create a Login and User in SQL Server
+Run the following script to create a new SQL Server login, user, and assign permissions:
+-- Replace `YourLogin` and `YourPassword` with your desired login name and password
+ CREATE LOGIN YourLogin WITH PASSWORD = 'YourPassword';
+ GO
+-- Replace `YourUser` with your desired username
+ CREATE USER YourUser FOR LOGIN YourLogin;
+ GO
+-- Grant read permissions to the restored database
+ USE [YourDatabaseName];
+ ALTER ROLE db_datareader ADD MEMBER YourUser;
+ GO
+
+ Example: Replace `YourLogin` with `xyx`, `YourPassword` with `admin`, and `YourDatabaseName` with the name of the restored database.
+
+
+4. Verify Permissions
+- In SSMS, navigate to: 
+ `Databases → YourDatabase → Security → Users → [YourUser] → Properties`
+- Under **Membership**, ensure that `db_datareader` is selected.
+
+![Screenshot (63)](https://github.com/user-attachments/assets/45e52879-f1fa-45ad-af12-0031be9d59a0)
+
+
 
 
 
