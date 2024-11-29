@@ -81,6 +81,21 @@ Log in to the Azure Portal and create a Resource Group to organize all related r
 
 ![image](https://github.com/user-attachments/assets/04077117-db53-4db3-a818-b961802005a5)
 
+
+## Part 2: Setting Up the Source Database
+
+### 1.Download Dataset
+
+Obtain the sample dataset from the [Microsoft Dataset Repository] You can use the .bak file to restore your sample database to your SQL Server instance. You first have to download the Database, you can download with below link
+
+https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksLT2022.bak and save it locally.
+
+### 2. Restore Dataset in SQL Server
+Use SQL Server Management Studio (SSMS) to restore the downloaded database backup:
+Open SSMS and connect to your SQL Server instance.
+Right-click on Databases → Restore Database → Select the downloaded backup file → Complete the restore process.
+
+
 ### 3. Create a Login and User in SQL Server
 Run the following script to create a new SQL Server login, user, and assign permissions:
 -- Replace `YourLogin` and `YourPassword` with your desired login name and password
@@ -151,6 +166,7 @@ AdventureWorksLT2022 contains a logical organization of tables grouped into func
     Address: Stores address data used across customers and sales.
 
 Entity Relation Diagram for this Database:
+![image](https://github.com/user-attachments/assets/66ae2f06-c60a-40ac-8ca9-8e9b17868478)
 
 
 
