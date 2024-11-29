@@ -96,22 +96,6 @@ Open SSMS and connect to your SQL Server instance.
 Right-click on Databases → Restore Database → Select the downloaded backup file → Complete the restore process.
 
 
-### 3. Create a Login and User in SQL Server
-Run the following script to create a new SQL Server login, user, and assign permissions:
--- Replace `YourLogin` and `YourPassword` with your desired login name and password
- CREATE LOGIN YourLogin WITH PASSWORD = 'YourPassword';
- GO
--- Replace `YourUser` with your desired username
- CREATE USER YourUser FOR LOGIN YourLogin;
- GO
--- Grant read permissions to the restored database
- USE [YourDatabaseName];
- ALTER ROLE db_datareader ADD MEMBER YourUser;
- GO
-
- Example: Replace `YourLogin` with `xyx`, `YourPassword` with `admin`, and `YourDatabaseName` with the name of the restored database.
-
-
 ### 3. Create a Login and User in SQL Server  
 
 Run the following script to create a new SQL Server login, user, and assign permissions:  
@@ -165,26 +149,26 @@ AdventureWorksLT2022 is a lightweight version of the AdventureWorks sample datab
 
 AdventureWorksLT2022 contains a logical organization of tables grouped into functional areas:
 
-1. Sales:
+**1. Sales**:
 
-    SalesOrderHeader: Contains details of individual sales orders, such as order dates, totals, and statuses.
-    SalesOrderDetail: Includes line-item details for each sales order, linking to products.
+- **SalesOrderHeader**: Contains details of individual sales orders, such as order dates, totals, and statuses.
+- **SalesOrderDetail**: Includes line-item details for each sales order, linking to products.
 
-2. Customer:
+**2. Customer**:
 
-    Customer: Stores customer information, including name, contact details, and demographics.
-    CustomerAddress: Tracks multiple addresses for each customer, including billing and shipping addresses.
+- **Customer**: Stores customer information, including name, contact details, and demographics.
+- **CustomerAddress**: Tracks multiple addresses for each customer, including billing and shipping addresses.
 
-3. Products:
+**3. Products**:
 
-    Product: Contains details about the products, such as names, prices, and categories.
-    ProductCategory and ProductModel: Provide hierarchical information about product classifications.
-    ProductDescription: Stores textual descriptions of products to enhance their understanding and marketing.
-    ProductModelProductDescription: Acts as a bridge table linking ProductModel to ProductDescription, supporting multilingual or versioned descriptions.
+- **Product**: Contains details about the products, such as names, prices, and categories.
+- **ProductCategory** and **ProductModel**: Provide hierarchical information about product classifications.
+- **ProductDescription**: Stores textual descriptions of products to enhance their understanding and marketing.
+- **ProductModelProductDescription**: Acts as a bridge table linking ProductModel to ProductDescription, supporting multilingual or versioned descriptions.
 
-4. Address and Location:
+**4. Address and Location**:
 
-    Address: Stores address data used across customers and sales.
+- **Address**: Stores address data used across customers and sales.
 
 Entity Relation Diagram for this Database:
 ![image](https://github.com/user-attachments/assets/66ae2f06-c60a-40ac-8ca9-8e9b17868478)
