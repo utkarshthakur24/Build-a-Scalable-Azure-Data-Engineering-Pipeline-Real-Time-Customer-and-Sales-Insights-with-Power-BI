@@ -532,6 +532,83 @@ With views now available in the **serverless SQL database**, the next step invol
 
 
 
+# Part 6: Security, Automation, and End-to-End Pipeline Testing
+
+In this phase, we focus on implementing security measures, enabling pipeline automation, and conducting end-to-end testing to ensure a reliable and scalable data engineering workflow.
+
+## 1. Security Using Azure Active Directory (AAD)
+
+For real-time projects involving multiple data engineers, managing access to resources is critical. Assigning access individually to team members is inefficient and hard to maintain. Instead, **Azure Active Directory (AAD)** allows you to simplify access control using **security groups**.
+
+### Steps to Implement Security with AAD
+
+#### 1.1 Create a Security Group
+
+1. Navigate to **Azure Active Directory** > **Manage** > **Groups**.
+2. Click on **New Group**.
+3. Fill in the details:
+   - **Group Type:** Select **Security**.
+   - **Group Name:** Provide a descriptive name (e.g., Data Engineering Team).
+   - **Owner:** Assign the group owner.
+   - **Members:** Add all team members who require access.
+4. Click **Create**.
+
+#### 1.2 Assign Access to the Resource Group
+
+1. Go to the **Resource Group** associated with the project.
+2. Navigate to **Access Control (IAM)** > **Add Role Assignment**.
+3. Choose a **Role** (e.g., **Contributor** to allow full access to the resources within the group).
+4. In **Members**, select the newly created security group.
+5. Click **Review and Assign**.
+
+### Benefits:
+
+- Adding new team members is as simple as adding them to the security group.
+- **Centralized access management** ensures security and scalability.
+- Access is revoked automatically if a team member is removed from the security group.
+
+## 2. Automation and Testing
+
+Automation ensures pipelines run reliably without manual intervention, while testing validates the end-to-end data flow and system behavior.
+
+### Automation with Triggers
+
+**Azure Data Factory (ADF)** supports triggers to schedule or automate pipeline executions based on specific events or time intervals.
+
+#### 2.1 Configure a Schedule Trigger
+
+1. Open **Azure Data Factory** > **Author** > **Pipelines**.
+2. Select the pipeline to automate.
+3. Click **Add Trigger** > **New/Edit** > **New Trigger**.
+4. Fill in the trigger details:
+   - **Name:** Provide a meaningful name (e.g., **Daily Trigger**).
+   - **Type:** Select **Schedule**.
+   - **Time Zone:** Choose your desired time zone (e.g., **Indian Standard Time**).
+   - **Recurrence:** Define the frequency (e.g., **1 Day**) and execution time.
+5. Save the settings and **publish** the pipeline.
+
+### Testing the Pipeline
+
+1. Add test data to the source system (e.g., insert new rows into source tables).
+2. Wait for the configured trigger to execute the pipeline.
+3. Validate the data flow:
+   - Verify that the pipeline processed the new records and updated the **Gold container** in the data lake.
+   - Open **Power BI**, click **Refresh**, and confirm the updated data reflects on the dashboard.
+
+#### Scenario Example:
+
+- The trigger is set to run daily at **00:00**.
+- Test data is added to the source table.
+- At midnight, the pipeline runs automatically, processes the new data, and updates the Gold container.
+- Upon refreshing Power BI, the dashboard reflects the new data.
+
+By incorporating **security** with Azure Active Directory, **automation** through triggers, and **rigorous testing**, we ensure:
+
+- **Secure Resource Access:** Simplified and scalable access management for the data engineering team.
+- **Seamless Automation:** Pipelines execute without manual intervention, improving reliability.
+- **Validated Processes:** End-to-end testing guarantees the system handles data changes and updates the reporting layer accurately.
+
+This step completes the setup of a **secure, automated**, and **fully functional data engineering pipeline**, ready for production use.
 
 
 
