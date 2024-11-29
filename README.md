@@ -71,7 +71,7 @@ Developing and running the data engineering pipeline to transform raw data into 
 Here are the steps we have followed:
 
 ### Part 1: Azure Environment Setup
-### **1.Azure Resource Group Setup**
+### **1. Azure Resource Group Setup**
 Log in to the Azure Portal and create a Resource Group to organize all related resources.
 
 ### **2. Create Required Azure Resources**
@@ -178,7 +178,89 @@ Entity Relation Diagram for this Database:
 
 
 
+## 2. Data ingestion
+Data ingestion is the process of collecting data from various sources and moving it to a central location for storage, processing, and analysis. In this phase, we set up pipelines in Azure Data Factory (ADF) to ingest data from an on-premises SQL Server database into Azure Data Lake Storage (ADLS).
+In Azure Data Lake Storage (ADLS), we created three folders to organize data by processing layers: Bronze, Silver, and Gold.
 
+### **Step 1: Pipeline to Copy All Tables Dynamically**
+Task is to create Pipeline to copy all tables dynamically from the SQL Server database with a single execution.
+**1.1 Lookup Activity**
+**1. Query Configuration**:
+Added a Lookup activity to the pipeline.
+Configured the Lookup source with the following SQL query to fetch table names: 
+ ```
+ SELECT 
+ s.name AS SchemaName,
+ t.name AS TableName 
+ FROM sys.tables t
+ INNER JOIN sys.schemas s
+ ON t.schema_id = s.schema_id
+ WHERE s.name = 'SalesLT';
+ ```
+
+**2. Result Output:**
+The query returned a JSON output containing all table names under the `SalesLT` schema. 
+ - Example Output: 
+ ```json
+ {
+ "count": 10,
+ "value": [
+ { "SchemaName": "SalesLT", "TableName": "Address" },
+ { "SchemaName": "SalesLT", "TableName": "Customer" },
+ …
+ ]
+ }
+ ```
+- -
+**1.2 ForEach Activity**
+Adding ForEach:
+
+Dragged a ForEach activity into the pipeline and connected it to the Lookup activity. 
+ - Configured the Items field in ForEach to use the `value` array from the Lookup output: 
+ ```json
+ @activity('look for all the tables').output.value
+ ```
+
+**2. Dynamic Table Processing**:
+Inside the ForEach activity, added a nested Copy Data activity.
+
+**1.3 Copy Data Activity (Inside ForEach)**
+**1. Source Configuration**: 
+ - Configured the SQL source with a dynamic query to fetch all rows from the current table being processed by the ForEach loop: 
+ ```
+ @{concat('SELECT * FROM ', item().SchemaName, '.', item().TableName)}
+ ```
+**2. Sink Configuration:**
+Parameters: Created two parameters in the sink dataset:
+ - `SchemaName`: Assigned with `@item().SchemaName`. 
+ - `TableName`: Assigned with `@item().TableName`. 
+ - File Path: Used the following dynamic expressions to store the table's data as a Parquet file in the Bronze folder: 
+ - Directory: 
+ ```
+ @concat(dataset().SchemaName, '/', dataset().TableName)
+ ``` 
+ - File Name: 
+ ```
+ @concat(dataset().TableName, '.parquet')
+ ```
+
+### Step 2: Running the Pipeline
+Publish and Trigger:
+
+After publishing the pipeline, it was triggered to execute.
+The pipeline iterated over all tables in the source schema, dynamically copying their data into the respective folders in the Bronze layer of ADLS.
+
+2. Successful Execution:
+The pipeline ran successfully, creating a directory structure in ADLS that mirrored the source schema and storing each table's data as a Parquet file.
+
+- -
+Key Benefits of the Approach
+Dynamic Scalability: With the Lookup and ForEach activities, the pipeline adapts to changes in the source schema without manual intervention.
+Optimized Storage: Data is stored in a structured and query-friendly Parquet format.
+Layered Architecture: The Bronze-Silver-Gold pattern ensures that data is progressively refined for analytics and reporting.
+
+This step marks the completion of the Data Ingestion phase, laying a solid foundation for downstream transformation and reporting.
+- -
 
 
 
