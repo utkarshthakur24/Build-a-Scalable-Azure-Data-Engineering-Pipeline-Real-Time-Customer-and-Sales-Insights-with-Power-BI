@@ -178,6 +178,124 @@ Entity Relation Diagram for this Database:
 
 
 
+
+
+
+
+
+
+## 2. Data Ingestion
+
+Data ingestion is the process of collecting data from various sources and moving it to a central location for storage, processing, and analysis. In this phase, pipelines were set up in **Azure Data Factory (ADF)** to ingest data from an on-premises SQL Server database into **Azure Data Lake Storage (ADLS)**. Data in ADLS was organized into three folders based on processing layers: **Bronze**, **Silver**, and **Gold**.
+
+### Step 1: Pipeline to Copy All Tables Dynamically
+
+#### Task
+Create a pipeline in ADF to copy all tables dynamically from the SQL Server database in a single execution.
+
+#### 1.1 Lookup Activity  
+1. **Query Configuration**  
+   - Added a **Lookup** activity to the pipeline.  
+   - Configured the Lookup source with the following SQL query to fetch table names:  
+
+     ```sql
+     SELECT 
+         s.name AS SchemaName,
+         t.name AS TableName
+     FROM sys.tables t
+     INNER JOIN sys.schemas s
+         ON t.schema_id = s.schema_id
+     WHERE s.name = 'SalesLT';
+     ```
+
+2. **Result Output**  
+   - The query returned a JSON output containing all table names under the `SalesLT` schema.  
+
+     **Example Output:**  
+     ```json
+     {
+       "count": 10,
+       "value": [
+         { "SchemaName": "SalesLT", "TableName": "Address" },
+         { "SchemaName": "SalesLT", "TableName": "Customer" },
+         ...
+       ]
+     }
+     ```
+
+#### 1.2 ForEach Activity  
+1. **Adding ForEach**  
+   - Dragged a **ForEach** activity into the pipeline and connected it to the Lookup activity.  
+   - Configured the **Items** field in ForEach to use the `value` array from the Lookup output:  
+
+     ```json
+     @activity('look for all the tables').output.value
+     ```
+
+2. **Dynamic Table Processing**  
+   - Inside the ForEach activity, added a nested **Copy Data** activity.
+
+#### 1.3 Copy Data Activity (Inside ForEach)  
+1. **Source Configuration**  
+   - Configured the SQL source with a dynamic query to fetch all rows from the current table being processed:  
+     ```sql
+     @{concat('SELECT * FROM ', item().SchemaName, '.', item().TableName)}
+     ```
+
+2. **Sink Configuration**  
+   - **Parameters:** Created two parameters in the sink dataset:  
+     - `SchemaName`: Assigned with `@item().SchemaName`.  
+     - `TableName`: Assigned with `@item().TableName`.  
+   - **File Path:** Used dynamic expressions to store the table's data as a **Parquet** file in the **Bronze** folder:  
+     - **Directory:**  
+       ```sql
+       @concat(dataset().SchemaName, '/', dataset().TableName)
+       ```  
+     - **File Name:**  
+       ```sql
+       @concat(dataset().TableName, '.parquet')
+       ```
+
+---
+![image](https://github.com/user-attachments/assets/7113581e-1c90-414a-9cbf-2ebb7d4e9c97)
+
+### Step 2: Running the Pipeline
+
+1. **Publish and Trigger**  
+   - Published and triggered the pipeline for execution.  
+   - The pipeline iterated over all tables in the source schema, dynamically copying their data into respective folders in the Bronze layer of ADLS.  
+
+2. **Successful Execution**  
+   - The pipeline executed successfully, creating a directory structure in ADLS that mirrored the source schema and storing each table's data as a **Parquet** file.
+
+---
+
+### Key Benefits of the Approach
+
+- **Dynamic Scalability**: The pipeline adapts to schema changes automatically using Lookup and ForEach activities.  
+- **Optimized Storage**: Data is stored in a structured, query-friendly **Parquet** format.  
+- **Layered Architecture**: The Bronze-Silver-Gold structure ensures data is progressively refined for analytics and reporting.
+
+This completes the **Data Ingestion** phase, establishing a strong foundation for downstream transformation and analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 2. Data ingestion
 Data ingestion is the process of collecting data from various sources and moving it to a central location for storage, processing, and analysis. In this phase, we set up pipelines in Azure Data Factory (ADF) to ingest data from an on-premises SQL Server database into Azure Data Lake Storage (ADLS).
 In Azure Data Lake Storage (ADLS), we created three folders to organize data by processing layers: Bronze, Silver, and Gold.
