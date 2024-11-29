@@ -514,6 +514,8 @@ To automate the execution of the stored procedure for all tables in the **Gold c
 - **Parameters:**
   - `ViewName`: The name of each table (retrieved dynamically).
   - **Dynamic Expression:** `@item().name`.
+![image](https://github.com/user-attachments/assets/ae6f74b3-0d57-408c-8327-ee1748fad9b1)
+
 
 After publishing and running the pipeline, views were successfully created for all tables in the Gold container.
 
