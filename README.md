@@ -412,6 +412,123 @@ The **Data Transformation** phase focuses on refining raw ingested data (Bronze 
 4. **Layered Processing**: Medallion Architecture organizes data for progressive refinement and easy traceability.
 
 This completes the **Data Transformation** phase, preparing the data for insights and analytics in the reporting stage.
+Link for Data Bricks NoteBooks:
+- [StorageMount.ipynb](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Azure%20DataBricks%20NoteBooks/StorageMount.ipynb)
+- [bronze to silver.ipynb](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Azure%20DataBricks%20NoteBooks/bronze%20to%20silver.ipynb)
+- [silver to gold.ipynb](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Azure%20DataBricks%20NoteBooks/silver%20to%20gold.ipynb)
+
+
+
+
+
+# Part 4: Data Loading
+
+In this phase of the project, we use **Azure Synapse Analytics** to load and manage data from the **Gold container** in the data lake. The goal is to make data accessible for querying and reporting through a **serverless SQL database**. This approach allows for efficient and cost-effective data handling while leveraging the integration and transformation capabilities of Synapse Analytics.
+
+## Using Azure Synapse Analytics for Data Loading
+
+Azure Synapse Analytics serves as a comprehensive platform combining **data orchestration** (similar to Azure Data Factory) and **data transformation** (similar to Azure Databricks). It simplifies workflows by enabling the creation of both **pipelines** and **Spark-based notebooks** in a unified environment.
+
+For this project, the **serverless SQL database** option was chosen due to the following benefits:
+
+### Benefits:
+
+- **Separation of Compute and Storage:**
+  - Data remains in the data lake, and only compute resources are utilized when querying the data.
+  - Ideal for smaller datasets or scenarios where the data structure is already optimized in the data lake.
+
+- **Cost Efficiency:**
+  - Serverless SQL databases charge only for query execution, unlike dedicated SQL pools, which require both storage and compute resources.
+
+## Steps to Set Up the Serverless SQL Database
+
+### 1. Database Creation
+
+A serverless SQL database named **gold_db** was created in **Synapse Analytics**. This database is directly connected to the data lake, so no additional linked service was required.
+
+### 2. Creating Views Dynamically
+
+To simplify querying, **views** were created for each table in the Gold container. A stored procedure was developed to automate this process.
+
+#### Stored Procedure: `CreateSQLServerlessview_gold1`
+
+This stored procedure dynamically creates or updates views for tables in the Gold container:
+
+```sql
+USE gold_db
+GO
+
+CREATE OR ALTER PROC CreateSQLServerlessview_gold1 @ViewName NVARCHAR(100)
+AS
+BEGIN
+    DECLARE @statement VARCHAR(MAX)
+    SET @statement = N'CREATE OR ALTER VIEW ' + @ViewName + ' AS
+    SELECT *
+    FROM
+    OPENROWSET(
+        BULK ''https://intechsg24.dfs.core.windows.net/gold/SalesLT/' + @ViewName + '/'',
+        FORMAT = ''DELTA''
+    ) AS [result]'
+    EXEC(@statement)
+END
+GO
+```
+
+This stored procedure generates views dynamically for Delta-formatted data in the Gold container.
+
+Here’s the requested content in markdown format:
+
+```markdown
+## 3. Pipeline Creation in Synapse Analytics
+
+To automate the execution of the stored procedure for all tables in the **Gold container**, a **Synapse pipeline** was created.
+
+### Pipeline Configuration:
+
+#### Step 1: Get Table Names
+
+- **Activity:** Get Metadata
+- **Settings:**
+  - **Linked Service:** Data Lake Gen 2
+  - **Field List:** Child items
+  - **Output:** Retrieves the folder names (table names) in the Gold container.
+
+**Sample Output:**
+
+```json
+{
+    "childItems": [
+        {"name": "Address", "type": "Folder"},
+        {"name": "Customer", "type": "Folder"},
+        ...
+    ]
+}
+```
+
+#### Step 2: ForEach Loop
+
+- Iterates over the table names retrieved from the **Get Metadata** activity.
+
+#### Step 3: Execute Stored Procedure
+
+- **Activity:** Stored Procedure
+- **Linked Service:** Connection to the serverless SQL database.
+- **Parameters:**
+  - `ViewName`: The name of each table (retrieved dynamically).
+  - **Dynamic Expression:** `@item().name`.
+
+After publishing and running the pipeline, views were successfully created for all tables in the Gold container.
+
+## Advantages of the Data Loading Setup
+
+- **Dynamic View Creation:** Automating view creation ensures scalability and minimizes manual effort when new tables are added to the Gold container.
+- **Seamless Integration:** The built-in connection between **Synapse Analytics** and **Azure Data Lake** simplifies data access without additional configurations.
+- **Optimized Query Performance:** Using **serverless SQL pools** enables querying **Delta-formatted data** directly from the data lake without data duplication.
+
+## Next Steps: Data Reporting
+
+With views now available in the **serverless SQL database**, the next step involves integrating **Power BI** to connect to this database. Power BI will be used to fetch and visualize the data, enabling actionable insights and reporting. This final phase will complete the end-to-end data pipeline, delivering a robust analytics solution.
+```
 
 
 
@@ -419,65 +536,6 @@ This completes the **Data Transformation** phase, preparing the data for insight
 
 
 
-
-
-
-
-
-
-
-
-![image](https://github.com/user-attachments/assets/721c8191-8d90-4ab0-b562-2a9bb8bbedb8)
-
---------
-
-
-
-
-
-
-
-
-
-![image](https://github.com/user-attachments/assets/7113581e-1c90-414a-9cbf-2ebb7d4e9c97)
-
-
-
-## Setup Instructions
-
-### Prerequisites
-- An Azure account with sufficient credits.
-- Access to an on-premises SQL Server database.
-
-### Step 1: Azure Environment Setup
-- **Create Resource Group**: Set up a new resource group in Azure.
-- **Provision Services**:
-  - Create an Azure Data Factory instance.
-  - Set up Azure Data Lake Storage with bronze, silver, and gold containers.
-  - Set up an Azure Databricks workspace and Synapse Analytics workspace.
-  - Configure Azure Key Vault for secret management.
-
-### Step 2: Data Ingestion
-- **Set up SQL Server**: Install SQL Server and SQL Server Management Studio (SSMS), restore the AdventureWorks database.
-- **Ingest Data with ADF**: Create pipelines in ADF to copy data from SQL Server to the bronze layer in ADLS.
-
-### Step 3: Data Transformation
-- **Mount Data Lake in Databricks**: Configure Databricks to access ADLS.
-- **Transform Data**: Use Databricks notebooks to clean and aggregate the data, transitioning it from bronze to silver to gold.
-
-### Step 4: Data Loading and Reporting
-- **Load Data into Synapse**: Set up a Synapse SQL pool and load the gold data for analysis.
-- **Create Power BI Dashboard**: Connect Power BI to Synapse and create visualizations based on business requirements.
-
-### Step 5: Automation and Monitoring
-- **Schedule Pipelines**: Use ADF to schedule the data pipelines to run daily.
-- **Monitor Pipeline Runs**: Use ADF and Synapse monitoring tools to ensure pipeline execution.
-
-### Step 6: Security and Governance
-- **Manage Access**: Set up role-based access control (RBAC) using Azure Entra ID (formerly Active Directory).
-
-### Step 7: End-to-End Testing
-- **Trigger and Test Pipelines**: Insert new records into the SQL database and ensure the pipeline runs successfully, updating the Power BI dashboard.
 
 ## Conclusion
 
