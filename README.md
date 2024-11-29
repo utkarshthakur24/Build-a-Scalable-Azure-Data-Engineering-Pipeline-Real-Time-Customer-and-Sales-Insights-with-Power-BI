@@ -69,7 +69,7 @@ Developing and running the data engineering pipeline to transform raw data into 
 Here are the steps we have followed:
 
 ### Part 1: Azure Environment Setup
-- **Azure Resource Group Setup**
+### **1.Azure Resource Group Setup**
 Log in to the Azure Portal and create a Resource Group to organize all related resources.
 
 ### **2. Create Required Azure Resources**
