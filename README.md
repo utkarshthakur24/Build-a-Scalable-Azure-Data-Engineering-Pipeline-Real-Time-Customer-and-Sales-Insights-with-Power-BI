@@ -476,8 +476,6 @@ GO
 
 This stored procedure generates views dynamically for Delta-formatted data in the Gold container.
 
-Here’s the requested content in markdown format:
-
 
 ## 3. Pipeline Creation in Synapse Analytics
 
