@@ -178,6 +178,19 @@ Entity Relation Diagram for this Database:
 
 
 
+
+
+
+
+
+
+
+
+
+![image](https://github.com/user-attachments/assets/7113581e-1c90-414a-9cbf-2ebb7d4e9c97)
+
+
+
 ## Setup Instructions
 
 ### Prerequisites
