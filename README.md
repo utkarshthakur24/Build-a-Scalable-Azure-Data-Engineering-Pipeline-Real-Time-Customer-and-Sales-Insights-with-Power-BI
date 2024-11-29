@@ -478,7 +478,7 @@ This stored procedure generates views dynamically for Delta-formatted data in th
 
 Here’s the requested content in markdown format:
 
-```markdown
+
 ## 3. Pipeline Creation in Synapse Analytics
 
 To automate the execution of the stored procedure for all tables in the **Gold container**, a **Synapse pipeline** was created.
@@ -528,7 +528,7 @@ After publishing and running the pipeline, views were successfully created for a
 ## Next Steps: Data Reporting
 
 With views now available in the **serverless SQL database**, the next step involves integrating **Power BI** to connect to this database. Power BI will be used to fetch and visualize the data, enabling actionable insights and reporting. This final phase will complete the end-to-end data pipeline, delivering a robust analytics solution.
-```
+
 
 
 
