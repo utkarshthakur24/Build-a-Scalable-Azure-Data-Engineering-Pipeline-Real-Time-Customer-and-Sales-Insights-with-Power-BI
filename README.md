@@ -617,9 +617,9 @@ The final dashboard offers intuitive visualizations and actionable insights, emp
 
 ![image](https://github.com/user-attachments/assets/24e7b463-d6f9-48c6-b592-6094f9367ded)
 
-Link for Power BI Dashboard File:
-[In PDF Format](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Dashboard/Azure%20Data%20Pipeline-%20Sales%20Analytics%20and%20Insights%20Dashboard%20Power%20BI.pdf)
-[In pbix Format](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Dashboard/Azure%20Data%20Pipeline-%20Sales%20Analytics%20and%20Insights%20Dashboard%20Power%20BI.pbix)
+#### Link for Power BI Dashboard File:
+- [In PDF Format](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Dashboard/Azure%20Data%20Pipeline-%20Sales%20Analytics%20and%20Insights%20Dashboard%20Power%20BI.pdf)
+- [In pbix Format](https://github.com/utkarshthakur24/End-to-End-Azure-Data-Engineering-Project--Real-Time-Sales-Analytics-and-Insights-with-Power-BI/blob/main/Dashboard/Azure%20Data%20Pipeline-%20Sales%20Analytics%20and%20Insights%20Dashboard%20Power%20BI.pbix)
 ---
 
 
