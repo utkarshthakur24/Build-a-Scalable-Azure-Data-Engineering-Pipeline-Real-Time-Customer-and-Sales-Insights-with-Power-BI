@@ -611,6 +611,15 @@ Using the pre-built views from the **Gold layer**, we developed a comprehensive 
 
 ---
 
+## Screenshot of the Completed Dashboard
+
+![image](https://github.com/user-attachments/assets/24e7b463-d6f9-48c6-b592-6094f9367ded)
+
+---
+
+
+
+
 ## Final Output
 
 The final dashboard offers intuitive visualizations and actionable insights, empowering stakeholders to make data-driven decisions.
@@ -628,25 +637,12 @@ The final dashboard offers intuitive visualizations and actionable insights, emp
 
 ---
 
-## Screenshot of the Completed Dashboard
 
-![image](https://github.com/user-attachments/assets/24e7b463-d6f9-48c6-b592-6094f9367ded)
-
----
 
 ## Conclusion
 
 The dashboard showcases key metrics and trends derived from the Gold layer, enabling stakeholders to make data-driven decisions effectively. Its intuitive design and insightful visualizations provide actionable insights for business growth.
 
-
-
-
-
-
-
-
-
-![image](https://github.com/user-attachments/assets/24e7b463-d6f9-48c6-b592-6094f9367ded)
 
 
 
