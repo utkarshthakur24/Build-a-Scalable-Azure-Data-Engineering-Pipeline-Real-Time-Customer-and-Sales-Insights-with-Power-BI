@@ -610,7 +610,9 @@ Using the pre-built views from the **Gold layer**, we developed a comprehensive 
 - **X-Axis:** Line Total (from the `SalesOrderDetail` table)
 
 ---
+## Final Output
 
+The final dashboard offers intuitive visualizations and actionable insights, empowering stakeholders to make data-driven decisions.
 ## Screenshot of the Completed Dashboard
 
 ![image](https://github.com/user-attachments/assets/24e7b463-d6f9-48c6-b592-6094f9367ded)
@@ -620,9 +622,7 @@ Using the pre-built views from the **Gold layer**, we developed a comprehensive 
 
 
 
-## Final Output
 
-The final dashboard offers intuitive visualizations and actionable insights, empowering stakeholders to make data-driven decisions.
 
 ### Key Insights:
 
