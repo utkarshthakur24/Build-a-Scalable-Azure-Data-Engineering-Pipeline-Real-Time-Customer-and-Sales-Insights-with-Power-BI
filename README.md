@@ -532,6 +532,23 @@ With views now available in the **serverless SQL database**, the next step invol
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+![image](https://github.com/user-attachments/assets/24e7b463-d6f9-48c6-b592-6094f9367ded)
+
+
+
+
 # Part 6: Security, Automation, and End-to-End Pipeline Testing
 
 In this phase, we focus on implementing security measures, enabling pipeline automation, and conducting end-to-end testing to ensure a reliable and scalable data engineering workflow.
